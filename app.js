@@ -18,12 +18,13 @@ app.use(
   })
 );
 
-app.use("/", router);
-
 app.use((req, res, next) => {
   res.locals.message = req.session.message;
+  req.session.message = null;
   next();
 });
+
+app.use("/", router);
 
 database.connect((err) => {
   if (err) throw err;

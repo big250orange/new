@@ -6,6 +6,11 @@ const add = (req, res) => {
   // const { note, body } = req.body;
   const { note } = req.body;
 
+  if (!note) {
+    req.session.message = "Note is required";
+    return res.redirect("/");
+  }
+
   // Same sa sql, wag kalimutan yung "?"
   // const sql = "INSERT INTO notes (note, body) VALUES (?, ?)";
   const sql = "INSERT INTO notes (note) VALUES (?)";
